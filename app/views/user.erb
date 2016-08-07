@@ -1,0 +1,89 @@
+<!-- USER PROFILE PAGE, HOLDS COLLECTIONS OF PETS -->
+
+<div class="container">
+  <header class="col-8">
+    <h1><a href="/?">WuvR</a></h1>
+  </header>
+
+  <div class="col-4">
+    <nav>
+      <ul>
+        <li class="nav"><a href="/profile"><h4>My Profile</h4></a></li>
+        <li class="nav"><a href="/logout"><h4>Log Out</h4></a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2>Welcome!</h2>
+    </div>
+  </div>
+</div>      
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2>Seach for your new biddy baby smoodgie pet friend:</h2>
+      <hr />
+    </div>
+  </div>
+</div>   
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <form action="/pets" method="post">
+        <label>What type of googie are you looking for?</label>
+        <select name="animal" id="animal-select">
+          <option value="">All pets</option>
+          <option value="dog">Dogs</option>
+          <option value="cat">Cats</option>
+          <option value="rabbit">Rabbits</option>
+          <option value="smallfurry">Small Creatures</option>
+          <option value="horse">Horses</option>
+          <option value="bird">Birds</option>
+          <option value="reptile">Fish, Reptiles and Amphibians</option>
+          <option value="pig">Pigs</option>
+          <option value="barnyard">Barnyard</option>
+        </select>
+        <label>What breed do you need?</label>
+        <select name="breed" id="breed-select">
+          <option value="">Please select an animal type</option>
+        </select>
+        <label>Where are you looking?</label>
+        <input value="" type="text" name="zip" placeholder="zip code" />
+        <button>Search!</button>
+      </form>
+      <hr />
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2>Check on your potential beeby boodgies:</h2>
+      <hr />
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <h2>Saved pet info here</h2>
+    </div>
+
+    <div class="col-6">
+      <h2>Saved pet info here</h2>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="/js/breedselect.js"></script>

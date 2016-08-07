@@ -1,0 +1,6 @@
+#  SET DATABASE CRITERIA
+#  =====================
+
+development:
+  adapter: 'sqlite3'
+  database: '../db.sqlite3'

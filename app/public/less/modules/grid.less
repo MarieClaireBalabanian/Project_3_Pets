@@ -1,0 +1,147 @@
+//  LESS MODULE FOR GRID SYSTEM
+//  ===========================
+
+@max-width: 1140px;
+@min-width: 755px;       //where media query kicks counter-increment
+@total-columns: 12;
+@gutter: 3%;                //margin
+
+
+.container {
+  padding: 0 20px;
+}
+
+.row {
+  width: 100%;
+  max-width: @max-width;
+  min-width: @min-width;
+  margin: 0 auto;
+  padding: 0.5em 0;
+  .clearfix;
+}
+
+// Creating columns
+.create-columns(@i) when (@i > 0) {     // @i is the iterator. represents column 1 thru 12
+  @column-width: (((@max-width * @i) / @total-columns) * 100) / @max-width;
+  @missing-width: (@gutter * ((@total-columns / @i) - 1)) / (@total-columns / @i);
+  @width: @column-width - @missing-width;
+
+  .col-@{i} {
+    display: block;
+    position: relative;
+    float: left;
+    width: @width;
+    margin-right: @gutter;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  .create-columns(@i - 1);   ///invokes the function
+}  
+.create-columns(@total-columns);
+
+
+// Clearfix mixin. minin kinda like functions in less. allow you to reuse code in multip places. you cannot use it in css
+.clearfix() {
+  *zoom:1;
+
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.push-2 {
+    left: calc(100% / 12 * 2);
+}
+
+.login {
+  text-align: right;
+  padding-top: 50px;
+  padding-right: 20px;
+
+    input {
+      border-radius: 10px;
+      outline: none;
+      text-align: center;
+    }
+}
+
+.signup {
+  display: inline;
+
+    input {
+      border-radius: 10px;
+      outline: none;
+      width: 150px;
+      height: 15px;
+      margin-right: 10px;
+      box-shadow: none;
+      text-align: center;
+    }
+}
+
+.pet-card {
+  float:         left;
+  margin:        auto;
+  text-align:    left;
+  border:        2px solid darkgrey;
+  border-radius: 3px;
+  padding:       2px;
+  overflow-y:    scroll;
+  margin-right:  10px;
+  margin-top:    10px;
+  height:        150px;
+
+  .card-divider {
+    display: block;
+    clear:   both;
+  
+    button {
+      float:        right;
+      margin-top:   20px;
+      margin-right: 10px;
+    }
+  }
+
+  .card-data {
+    float:   left;
+    display: inline;
+    margin:  0;
+  }
+
+  .pet-img {
+    border:        2px solid grey;
+    border-radius: 3px;
+    max-height:    75px;
+  }
+
+  .card-list {
+    list-style-type: none;
+    text-decoration: none;
+    margin-left:     5px;
+    padding:         0;
+
+    // .pet-name {
+    //   display:   flex;
+    //   flex-wrap: wrap;
+    // }
+  }
+}
+
+.form {
+ padding-right: 200px;
+ padding-top: 17px;
+ padding-left: 50px;
+ box-sizing: border-box;
+}
+
+#map {
+      height: 500px;
+    }
+
