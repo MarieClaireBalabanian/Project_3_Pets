@@ -23,35 +23,51 @@
   </div>
 
   <div class="row">
-    <div class="pet-card-holder col-12">
-    
-      <% @petArray.each do |pet| %>
-        
-        <div class="pet-card col-4">
-          <div class="card-divider">
-            <img class="pet-img card-data" src=<%= pet["picsmall"] %> />
+      <div class="pet-card-holder col-12">
+      
+        <% @petArray.each do |pet| %>
+          
+          <div class="pet-card col-4">
 
-            <ul class="card-list card-data">
-              <li class="pet-name"><strong><em><%= pet["name"] %></em> </strong></li>
-              <li><%= pet["breed"] %></li>
-              <li><%= pet["email"] %></li>
-              <li><%= pet["city"] %>, <%= pet["state"] %></li>
-            </ul>
+            <div class="card-divider">
+              <img class="pet-img card-data" src=<%= pet["picsmall"] %> />
+
+              <ul class="card-list card-data">
+                <li class="pet-name"><strong><em><%= pet["name"] %></em> </strong></li>
+                <li><%= pet["breed"] %></li>
+                <li><%= pet["email"] %></li>
+                <li><%= pet["city"] %>, <%= pet["state"] %></li>
+              </ul>
+            </div>
+
+            <div class="card-divider">
+              <form action="/pets/petsave" method="post">
+                <input type="hidden" name="name" value="<%= pet["name"] %>" />
+                <input type="hidden" name="animal" value="<%= pet["animal"] %>" />
+                <input type="hidden" name="breed" value="<%= pet["breed"] %>" />
+                <input type="hidden" name="phone" value="<%= pet["phone"] %>" />
+                <input type="hidden" name="email" value="<%= pet["email"] %>" />
+                <input type="hidden" name="address" value="<%= pet["address"] %>" />
+                <input type="hidden" name="city" value="<%= pet["city"] %>" />
+                <input type="hidden" name="state" value="<%= pet["state"] %>" />
+                <input type="hidden" name="zip" value="<%= pet["zip"] %>" />
+                <input type="hidden" name="description" value="<%= pet["description"] %>" />
+                <input type="hidden" name="picsmall" value="<%= pet["picsmall"] %>" />
+                <input type="hidden" name="petid" value="<%= pet["petid"] %>" />
+                <button type="submit">Meet me!</button>
+              </form>
+            </div>
+
           </div>
 
-          <div class="card-divider">
-            <form action="/pets/petsave" method="post">
-              <input type="hidden" name="petdata" value=<%= pet["petid"] %> />
-              <button type="submit">Save</button>
-            </form>
+        <% end %>
 
-          </div>
-        </div>
-
-      <% end %>
-
+      </div>
     </div>
-  </div>
+
+
+
+  
 </div>
 
 
