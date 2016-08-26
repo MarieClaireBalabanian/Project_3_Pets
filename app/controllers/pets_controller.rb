@@ -63,13 +63,9 @@ class PetsController < ApplicationController
     result  = HTTParty.get("http://api.petfinder.com/pet.find?key=61635e39395ce71e4d0eba82c79adb55&location=#{@zip}&animal=#{@animal}&breed=#{@breed}&count=9&format=json").parsed_response
     
     @petArray = []
+
     for animal in result["petfinder"]["pets"]["pet"] do
 
-
-
-
-
-      
       pet = {"name"        =>animal["name"]["$t"],
              "animal"      =>animal["animal"]["$t"],
              "breed"       =>@breed,
@@ -84,41 +80,24 @@ class PetsController < ApplicationController
              "petid"       =>animal["id"]["$t"]
              # "piclarge"    =>animal["media"]["photos"]["photo"][3]["$t"]
             }
-
-
-
-    # if animal["media"]["photos"]["photo"][1]["$t"]
-    #   pet[:picsmall] = animal["media"]["photos"]["photo"][1]["$t"]
-    # else
-    #   pet[:picsmall] = "No Photo"
-    # end
-
-
-    # if animal["media"]["photos"]["photo"][2]["$t"]
-    #   pet[:piclarge] = animal["media"]["photos"]["photo"][2]["$t"]
-    # else
-    #   pet[:piclarge] = "No Photo"
-    # end 
+ 
       @petArray.push(pet)
-      puts pet["description"]
+      # puts pet["description"]
     end
-
-
-
-    @addressArray = []
-    @nameArray = []
-    @metaArray = [@nameArray, @addressArray]
-    puts @metaArray
 
     @petArray.each do |i|
       address = i["address"]
       city = i["city"]
       state = i["state"]
       zip = i["zip"]
-      name = i["name"]
-      
-      @nameArray.push("#{name}")
-      @addressArray.push("#{address} #{city} #{state} #{zip}")
+
+      @petAddress = "#{zip}"
+      puts @petAddress
+      # @petCoord = Geocoder.coordinates(@petAddress)
+      # @petLat   = @petCoord[0]
+      # @petLng   = @petCoord[1]
+      # puts @petLat
+      # puts @petLng
     end
    
 
