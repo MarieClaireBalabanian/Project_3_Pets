@@ -18,7 +18,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h2>Welcome!</h2>
+      <h2>Hi, <%= @user["firstname"] %>!</h2>
     </div>
   </div>
 </div>      
@@ -26,7 +26,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h2>Seach for your new biddy baby smoodgie pet friend:</h2>
+      <h2>Seach for a new friend:</h2>
       <hr />
     </div>
   </div>
@@ -35,8 +35,8 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <form action="/pets" method="post">
-        <label>What type of googie are you looking for?</label>
+      <form action="/pets" method="post" class="search-form">
+        <label class="search-element">Type of pet?</label>
         <select name="animal" id="animal-select">
           <option value="">All pets</option>
           <option value="dog">Dogs</option>
@@ -49,11 +49,11 @@
           <option value="pig">Pigs</option>
           <option value="barnyard">Barnyard</option>
         </select>
-        <label>What breed do you need?</label>
+        <label class="search-element">Type of pet?</label>
         <select name="breed" id="breed-select">
           <option value="">Please select an animal type</option>
         </select>
-        <label>Where are you looking?</label>
+        <label class="search-element">Where are you looking?</label>
         <input value="" type="text" name="zip" placeholder="zip code" />
         <button>Search!</button>
       </form>
@@ -66,7 +66,39 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h2>Check on your potential beeby boodgies:</h2>
+      <h2>Here are the pets you are following:</h2>
+
+      <% @petlist.each do |pet| %>
+          
+        <div class="pet-card col-12">
+
+          <div class="card-divider">
+            <img class="pet-img card-data" src=<%= pet["photo"] %> />
+
+            <ul class="card-list card-data">
+              <li class="pet-name"><strong><em>Name: <%= pet["name"] %></em> </strong></li>
+              <li>Type: <%= pet["animal"] %></li>
+              <li>Breed: <%= pet["breed"] %></li>
+              <li>Email: <%= pet["email"] %></li>
+              <li>Phone: <%= pet["phone"] %></li>
+              <li>Location: <%= pet["city"] %>, <%= pet["state"] %> <%= pet["zip"] %></li>
+            </ul>
+          </div>
+
+          <div class="card-divider">
+            <p>About <%= pet["name"] %>: <%= pet["description"] %></p>
+          </div>
+
+          <div class="card-divider">
+            <form action="/pets/petsave" method="post">
+              <input type="hidden" name="petdata" value=<%= pet["petid"] %> />
+            </form>
+          </div>
+
+        </div>
+
+      <% end %>
+
       <hr />
     </div>
   </div>
@@ -74,15 +106,7 @@
 
 
 <div class="container">
-  <div class="row">
-    <div class="col-6">
-      <h2>Saved pet info here</h2>
-    </div>
-
-    <div class="col-6">
-      <h2>Saved pet info here</h2>
-    </div>
-  </div>
+  
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

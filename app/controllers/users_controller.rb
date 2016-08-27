@@ -3,6 +3,7 @@
 
 class UsersController < ApplicationController
 
+
   #  GET - /users/ - access JSON of all registered users
   #  ---------------------------------------------------
   get '/allusers/?' do
@@ -15,21 +16,67 @@ class UsersController < ApplicationController
     end
   end
 
+
   #  GET - /users/profile/ - goes to profile page if logged in
   #  ---------------------------------------------------------
   get '/profile/?' do
     if session[:is_logged_in] == true
-      puts session.id
-      
 
-      user = User.find(session[:user_id])
-      puts '-------------------------------------------'
-      puts user
+      user = User.find_by(id: session[:user_id])
+      @user = {
+        "username"  =>user["username"],
+        "password"  =>user["password"],
+        "firstname" =>user["firstname"],
+        "lastname"  =>user["lastname"],
+        "id"        =>user["id"]
+      }
+
+      @petlist = []
+
+      petsget = JSON.parse(Pet.where(userid: session[:user_id]).to_json)
+      
+      for pet in petsget do
+        @petlist.push(pet)
+        puts pet["name"]
+      end
+
+      # for pet in petsget do
+      #   puts pet
+      # end
+      # puts '=================================='
+
+
+
+
+
+
+
+      # for pet in petsget do
+      # pet = {"name"        =>animal["name"]["$t"],
+      #        "animal"      =>animal["animal"]["$t"],
+      #        "breed"       =>@breed,
+      #        "description" =>animal["description"]["$t"],
+      #        "phone"       =>animal["contact"]["phone"]["$t"],
+      #        "email"       =>animal["contact"]["email"]["$t"],
+      #        "address"     =>animal["contact"]["address1"]["$t"],
+      #        "city"        =>animal["contact"]["city"]["$t"],
+      #        "state"       =>animal["contact"]["state"]["$t"],
+      #        "zip"         =>animal["contact"]["zip"]["$t"],
+      #        "picsmall"    =>animal["media"]["photos"]["photo"][1]["$t"],
+      #        "petid"       =>animal["id"]["$t"]
+      #       }
+ 
+      # @savedpets.push(pet)
+      # puts pet["name"]
+      # end
+
+
       erb :user
     else
       redirect '/'
     end
   end
+
 
   #  POST - /users/signup/ - sets up a new user
   #                          bcrypts password
@@ -53,13 +100,14 @@ class UsersController < ApplicationController
     end
   end
 
+
   #  GET - /users/logout/ - cancels active session
   #  ---------------------------------------------
   get '/logout/?' do
     session =  nil
-    puts "-----------"
     redirect '/'
   end
+
 
   #  POST - /users/login/ - logs in registered user
   #  ----------------------------------------------
@@ -76,10 +124,6 @@ class UsersController < ApplicationController
       if password == params['password'] 
         session[:is_logged_in] = true
         session[:user_id] = user.id
-        puts ' ------------------------- '
-        puts session.id
-        puts ' ------------------------- '
-        puts session[:user_id]
         redirect '/profile'
       else
         @log_message = "Incorrect password"
@@ -87,6 +131,7 @@ class UsersController < ApplicationController
       end
     end
   end
+
 
   #  GET - /users/ - render the home page
   #  ------------------------------------
