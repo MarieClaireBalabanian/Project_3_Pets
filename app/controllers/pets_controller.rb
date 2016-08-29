@@ -45,7 +45,6 @@ class PetsController < ApplicationController
   end
 
 
-
   #  POST - /pets/ - Renders Ajax search results and map
   #                  sets params for us in Ajax request
   #  ---------------------------------------------------
@@ -55,14 +54,15 @@ class PetsController < ApplicationController
     @breed  = params[:breed]
     @zip    = params[:zip]
     
-    @zipCoord = Geocoder.coordinates(@zip)
-    @zipLat = @zipCoord[0]
-    @zipLng = @zipCoord[1]
+    @userCoord = Geocoder.coordinates(@zip)
+    @userLat = @userCoord[0]
+    @userLng = @userCoord[1]
 
   
-    result  = HTTParty.get("http://api.petfinder.com/pet.find?key=61635e39395ce71e4d0eba82c79adb55&location=#{@zip}&animal=#{@animal}&breed=#{@breed}&count=9&format=json").parsed_response
+    result  = HTTParty.get("http://api.petfinder.com/pet.find?key=61635e39395ce71e4d0eba82c79adb55&location=#{@zip}&animal=#{@animal}&breed=#{@breed}&count=25&format=json").parsed_response
     
     @petArray = []
+ 
 
     for animal in result["petfinder"]["pets"]["pet"] do
 
@@ -80,27 +80,34 @@ class PetsController < ApplicationController
              "petid"       =>animal["id"]["$t"]
              # "piclarge"    =>animal["media"]["photos"]["photo"][3]["$t"]
             }
- 
-      @petArray.push(pet)
+
+      @petAddress = pet["zip"]
+      puts "--------------"
+      @petCoord = Geocoder.coordinates(@petAddress)
+      
+      if Geocoder::Calculations.distance_between(@petCoord, @userCoord) < 26
+        @petArray.push(pet)
+      end
+
       # puts pet["description"]
     end
 
+    @petInfo = []
     @petArray.each do |i|
-      address = i["address"]
+      @name = i["name"]
+      street = i["address"]
       city = i["city"]
       state = i["state"]
       zip = i["zip"]
 
-      @petAddress = "#{zip}"
-      puts @petAddress
-      # @petCoord = Geocoder.coordinates(@petAddress)
-      # @petLat   = @petCoord[0]
-      # @petLng   = @petCoord[1]
-      # puts @petLat
-      # puts @petLng
-    end
-   
 
+
+      @petAddress = "#{street} #{city} #{state} #{zip}"
+
+      @petInfo.push([@petAddress, @name])
+      puts @petInfo.class
+      p @petInfo
+    end
 
     erb :results
   end
