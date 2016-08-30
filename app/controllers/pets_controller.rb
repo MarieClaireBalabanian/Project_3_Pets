@@ -45,48 +45,67 @@ class PetsController < ApplicationController
     @breed  = params[:breed]
     @zip    = params[:zip]
     
-    # @zipCoord = Geocoder.coordinates(@zip)
-    # @zipLat = @zipCoord[0]
-    # @zipLng = @zipCoord[1]
+    @userCoord = Geocoder.coordinates(@zip)
+    @userLat = @userCoord[0]
+    @userLng = @userCoord[1]
   
-    result  = HTTParty.get("http://api.petfinder.com/pet.find?key=61635e39395ce71e4d0eba82c79adb55&location=#{@zip}&animal=#{@animal}&breed=#{@breed}&count=25&format=json").parsed_response
+    result  = HTTParty.get("http://api.petfinder.com/pet.find?key=61635e39395ce71e4d0eba82c79adb55&location=#{@zip}&animal=#{@animal}&breed=#{@breed}&count=50&format=json").parsed_response
     
     @petArray = []
-
+      
     for animal in result["petfinder"]["pets"]["pet"] do
-      pet = {"name"        =>animal["name"]["$t"],
-             "animal"      =>animal["animal"]["$t"],
-             "breed"       =>@breed,
-             "description" =>animal["description"]["$t"],
-             "phone"       =>animal["contact"]["phone"]["$t"],
-             "email"       =>animal["contact"]["email"]["$t"],
-             "address"     =>animal["contact"]["address1"]["$t"],
-             "city"        =>animal["contact"]["city"]["$t"],
-             "state"       =>animal["contact"]["state"]["$t"],
-             "zip"         =>animal["contact"]["zip"]["$t"],
-             "picsmall"    =>animal["media"]["photos"]["photo"][1]["$t"],
-             "petid"       =>animal["id"]["$t"]
-            }
- 
-      @petArray.push(pet)
-      puts pet["name"]
+      if animal["media"].length > 0
+        pet = {"name"        =>animal["name"]["$t"],
+               "animal"      =>animal["animal"]["$t"],
+               "breed"       =>@breed,
+               "description" =>animal["description"]["$t"],
+               "phone"       =>animal["contact"]["phone"]["$t"],
+               "email"       =>animal["contact"]["email"]["$t"],
+               "address"     =>animal["contact"]["address1"]["$t"],
+               "city"        =>animal["contact"]["city"]["$t"],
+               "state"       =>animal["contact"]["state"]["$t"],
+               "zip"         =>animal["contact"]["zip"]["$t"],
+               "picsmall"    =>animal["media"]["photos"]["photo"][1]["$t"],
+               "petid"       =>animal["id"]["$t"]
+              }
+      else
+        pet = {"name"        =>animal["name"]["$t"],
+               "animal"      =>animal["animal"]["$t"],
+               "breed"       =>@breed,
+               "description" =>animal["description"]["$t"],
+               "phone"       =>animal["contact"]["phone"]["$t"],
+               "email"       =>animal["contact"]["email"]["$t"],
+               "address"     =>animal["contact"]["address1"]["$t"],
+               "city"        =>animal["contact"]["city"]["$t"],
+               "state"       =>animal["contact"]["state"]["$t"],
+               "zip"         =>animal["contact"]["zip"]["$t"],
+               "picsmall"    =>"/img/noImage.png",
+               "petid"       =>animal["id"]["$t"]
+              }
+      end 
+
+      @petAddress = pet["zip"]
+      @petCoord = Geocoder.coordinates(@petAddress)
+        
+        if Geocoder::Calculations.distance_between(@petCoord, @userCoord) <= 25
+          @petArray.push(pet)
+        end
+    end
+    
+    
+    @petInfo = []
+
+    @petArray.each do |i|
+      @name = i["name"]
+      street = i["address"]
+      city = i["city"]
+      state = i["state"]
+      zip = i["zip"]
+
+      @petAddress = "#{zip}"
+      @petInfo.push([@petAddress, @name])
     end
 
-    # @petArray.each do |i|
-    #   address = i["address"]
-    #   city = i["city"]
-    #   state = i["state"]
-    #   zip = i["zip"]
-
-    #   @petAddress = "#{zip}"
-    #   puts @petAddress
-    #   @petCoord = Geocoder.coordinates(@petAddress)
-    #   @petLat   = @petCoord[0]
-    #   @petLng   = @petCoord[1]
-    #   puts @petLat
-    #   puts @petLng
-    # end
-   
     erb :results
   end
 end

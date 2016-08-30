@@ -2,5 +2,19 @@
 #  =====================
 
 development:
-  adapter: 'sqlite3'
-  database: '../db.sqlite3'
+  adapter: postgresql
+  database: 'wuvrdb'
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: postgresql
+  database: 'wuvrdb'
+  pool: 5
+  timeout: 5000
+
+production:
+  adapter: postgresql
+  database: 'wuvrdb'
+  pool: 5
+  timeout: 5000

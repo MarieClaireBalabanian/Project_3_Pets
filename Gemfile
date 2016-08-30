@@ -15,10 +15,17 @@ gem 'json'
 gem 'httparty'
 gem 'pry'
 gem 'geocoder'
+gem 'rake', '~> 11.2', '>= 11.2.2'
 
 #  Dev dependent gems
 #  ------------------
-group :development do
+group :development, :test do
   gem 'rerun'
   gem 'sqlite3'
+end
+
+#  Production dependent gems
+#  -------------------------
+group :production do
+  gem 'pg', '~> 0.18.4'
 end
