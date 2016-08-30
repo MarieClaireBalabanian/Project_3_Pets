@@ -14,7 +14,7 @@ database_cxn = YAML.load_file('./config/database.yml')
 
 #  Setup connection with Active Record
 #  -----------------------------------
-ActiveRecord::Base.establish_connection(database_cxn[ENV['RACK_ENV']]
+ActiveRecord::Base.establish_connection(database_cxn[ENV['RACK_ENV']])
 
 #  Require models
 #  --------------
