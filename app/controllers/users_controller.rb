@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 
       # for pet in petsget do
       #   puts pet
-      # end
+      # end 
       # puts '=================================='
 
 

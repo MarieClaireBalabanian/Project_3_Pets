@@ -16,9 +16,13 @@ gem 'httparty'
 gem 'pry'
 gem 'geocoder'
 
-#  Dev dependent gems
+#  Environment gems
 #  ------------------
 group :development do
   gem 'rerun'
   gem 'sqlite3'
+end
+
+group :production do
+  gem 'mysql2', '~> 0.4.4'
 end
