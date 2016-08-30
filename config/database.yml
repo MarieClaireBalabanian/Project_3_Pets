@@ -2,19 +2,12 @@
 #  =====================
 
 development:
-  adapter: postgresql
-  database: 'wuvrdb'
-  pool: 5
-  timeout: 5000
-
-test:
-  adapter: postgresql
-  database: 'wuvrdb'
-  pool: 5
-  timeout: 5000
+  adapter: sqlite3
+  database: ../db.sqlite3
 
 production:
-  adapter: postgresql
-  database: 'wuvrdb'
-  pool: 5
-  timeout: 5000
+  adapter: mysql2
+  database: heroku_05d4854da3a4a42
+  username: b5e871bd510240
+  password: ff0c2bbe
+  host: mysql://us-cdbr-iron-east-04.cleardb.net/heroku_05d4854da3a4a42?reconnect=true
