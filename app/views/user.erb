@@ -1,11 +1,10 @@
 <!-- USER PROFILE PAGE, HOLDS COLLECTIONS OF PETS -->
-
-<div class="container">
-  <header class="col-8">
+<div class="row">
+  <header class="col l6 m6 s12">
     <h1><a href="/?">WuvR</a></h1>
   </header>
 
-  <div class="col-4">
+  <div class="col l6 m6 s12">
     <nav>
       <ul>
         <li class="nav"><a href="/profile"><h4>My Profile</h4></a></li>
@@ -15,26 +14,23 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <h2>Hi, <%= @user["firstname"] %>!</h2>
-    </div>
-  </div>
-</div>      
 
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <h2>Seach for a new friend:</h2>
-      <hr />
-    </div>
+<div class="row">
+  <div class="col l12 m12 s12 center">
+    <h2>Hi, <%= @user["firstname"] %>!</h2>
   </div>
-</div>   
+</div>     
 
-<div class="container">
+<div class="row">
+  <div class="col l12 m12 s12 center">
+    <h3>Search for a new friend:</h3>
+    <hr />
+  </div>
+</div> 
+
+
   <div class="row">
-    <div class="col-12">
+    <div class="col l12 m12 s12 center">
       <form action="/pets" method="post" class="search-form">
         <label class="search-element">Type of pet?</label>
         <select name="animal" id="animal-select">
@@ -51,26 +47,36 @@
         </select>
         <label class="search-element">Type of pet?</label>
         <select name="breed" id="breed-select">
-          <option value="">Please select an animal type</option>
+          <option value="">Please select a breed</option>
         </select>
-        <label class="search-element">Where are you looking?</label>
-        <input value="" type="text" name="zip" placeholder="zip code" />
+        <label class="search-element">Within 25 miles of...</label>
+
+        <div class="row">
+          <div class="col l12 m12 s12 center">
+            <input id="zipinput" value="" type="text" name="zip" placeholder="Zip Code" />
+          </div>
+        </div>
+
+      <div class="row"> 
+        <div class="col l12 m12 s12 center">
         <button>Search!</button>
+      </div>
+    </div>
+
       </form>
-      <hr />
     </div>
   </div>
-</div>
 
 
-<div class="container">
+
+
   <div class="row">
-    <div class="col-12">
-      <h2>Here are the pets you are following:</h2>
+    <div class="col l12 m12 s12 center">
+      <h3>Here are the pets you are following:</h3>
 
       <% @petlist.each do |pet| %>
           
-        <div class="pet-card col-12">
+        <div class="pet-card">
 
           <div class="card-divider">
             <img class="pet-img card-data" src=<%= pet["photo"] %> />
@@ -102,7 +108,7 @@
       <hr />
     </div>
   </div>
-</div>
+
 
 
 <div class="container">

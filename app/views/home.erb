@@ -1,10 +1,9 @@
 <!-- HOME PAGE ERB -->
-
-<div class="container">
-  <header class="col-6">
-    <h1><a href="/?">WuvR</a></h1>
+<div class="row">
+  <header class="col l6 m12 s12">
+  <h1><a href="/?">WuvR</a></h1>
   </header>
-  <div class="col-6">
+  <div class="col l6 m12 s12">
   <form class="login" method="post" action="/login">
     <h4><%= @log_message %></h4>
     <input type="text" name="username" placeholder="Username" />
@@ -14,33 +13,33 @@
  </div> 
 </div>
 
+<div class="row">
+  <div class="col l12 m12 s12">
+    <h2>Love is just a few clicks away</h2>
+  </div> 
+</div>    
 
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <h2>Love is just a few clicks away</h2>
-    </div> 
-  </div>    
+<div class="row">
+  <div class="col l12 m12 s12 banner center" >
+  </div> 
+</div>
+
+<div class="row">
+  <div class="col l12 m12 s12 signH center"> 
+    <h3 id="signh2">Sign Up!</h3>
   </div>
+</div>
 
-<div class="container" >
-  <div class="col-12 banner" >
-    
-    <div class="col-12 sign">
-      <form class="signup" method="post" action="/signup">
-        <div class="col-3 signH"> 
-          <h3 id="signh2">Sign Up!</h3>
-        </div>
-        <div class="col-9 form" > 
-          <input type="text" name="username" placeholder="Choose a Username" />
-          <input type="password" name="password" placeholder="Choose a Password" />
-          <input type="text" name="firstname" placeholder="Enter your first name" />
-          <input type="text" name="lastname" placeholder="Enter your last name" />
-          <button type="submit">Sign Up</button>
-          <h3><%= @sign_message %></h3>
-        </div>
-      </form>
-    </div>
+<div class="row">
+  <div class="col l12 m12 s12 form center" > 
+    <h3><%= @sign_message %></h3>
+    <form class="signup" method="post" action="/signup">
+      <input type="text" name="username" placeholder="Choose a Username" />
+      <input type="password" name="password" placeholder="Choose a Password" />
+      <input type="text" name="firstname" placeholder="Enter your First Name" />
+      <input type="text" name="lastname" placeholder="Enter your Last Name" />
+      <button type="submit">Sign Up</button>  
+    </form>
   </div>
 </div>
 

@@ -1,11 +1,12 @@
 <!-- PAGE FOR RESULTS OF SEARCH / AJAX QUERY -->
 
-<div class="container">
-  <header class="col-8">
+<div class="row">
+  <header class="col l6 m6 s12">
     <h1><a href="/?">WuvR</a></h1>
   </header>
 
-  <div class="col-4">
+
+  <div class="col l6 m6 s12">
     <nav>
       <ul>
         <li class="nav"><a href="/profile"><h4>My Profile</h4></a></li>
@@ -17,17 +18,17 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-8 push-2">
-      <div id="map"></div>
+    <div class="col l12 m12 s12 center">
+      <h4>Take a look at these sweethearts:</h4>
     </div>
   </div>
 
   <div class="row">
-      <div class="pet-card-holder col-12">
+      <div class="pet-card-holder col l12 m12 s12">
       
         <% @petArray.each do |pet| %>
           
-          <div class="pet-card col-12">
+          <div class="pet-card col l12 m12 s12">
 
             <div class="card-divider">
               <img class="pet-img card-data" src=<%= pet["picsmall"] %> />
@@ -65,4 +66,4 @@
 
 
 
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDntNQvZ1AMlJwJDnwycxyLWJcJvZUmCfk&libraries=places&libraries=geometry"></script> -->
+

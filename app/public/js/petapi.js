@@ -15,7 +15,7 @@ $.ajax({
     animal:   animal,
     breed:    breed,
     location: zip,
-    count:    50,
+    count:    25,
     output:   "full"
   },
   dataType: 'jsonp',
