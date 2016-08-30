@@ -1,11 +1,12 @@
 <!-- PAGE FOR RESULTS OF SEARCH / AJAX QUERY -->
 
-<div class="container">
-  <header class="col-8">
+<div class="row">
+  <header class="col l6 m6 s12">
     <h1><a href="/?">WuvR</a></h1>
   </header>
 
-  <div class="col-4">
+
+  <div class="col l6 m6 s12">
     <nav>
       <ul>
         <li class="nav"><a href="/profile"><h4>My Profile</h4></a></li>
@@ -17,44 +18,39 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-8 push-2">
-      <div id="map"></div>
+    <div class="col l12 m12 s12 center">
+      <h4>Take a look at these sweethearts:</h4>
     </div>
   </div>
 
   <div class="row">
-      <div class="pet-card-holder col-12">
+      <div class="pet-card-holder col l12 m12 s12">
       
         <% @petArray.each do |pet| %>
           
-          <div class="pet-card col-4">
+          <div class="pet-card col l12 m12 s12">
 
             <div class="card-divider">
               <img class="pet-img card-data" src=<%= pet["picsmall"] %> />
 
               <ul class="card-list card-data">
-                <li class="pet-name"><strong><em><%= pet["name"] %></em> </strong></li>
-                <li><%= pet["breed"] %></li>
-                <li><%= pet["email"] %></li>
-                <li><%= pet["city"] %>, <%= pet["state"] %></li>
+                <li class="pet-name"><strong><em>Name: <%= pet["name"] %></em> </strong></li>
+                <li>Type: <%= pet["animal"] %></li>
+                <li>Breed: <%= pet["breed"] %></li>
+                <li>Email: <%= pet["email"] %></li>
+                <li>Phone: <%= pet["phone"] %></li>
+                <li>Location: <%= pet["city"] %>, <%= pet["state"] %> <%= pet["zip"] %></li>
               </ul>
             </div>
 
             <div class="card-divider">
+              <p>About <%= pet["name"] %>: <%= pet["description"] %></p>
+            </div>
+
+            <div class="card-divider">
               <form action="/pets/petsave" method="post">
-                <input type="hidden" name="name" value="<%= pet["name"] %>" />
-                <input type="hidden" name="animal" value="<%= pet["animal"] %>" />
-                <input type="hidden" name="breed" value="<%= pet["breed"] %>" />
-                <input type="hidden" name="phone" value="<%= pet["phone"] %>" />
-                <input type="hidden" name="email" value="<%= pet["email"] %>" />
-                <input type="hidden" name="address" value="<%= pet["address"] %>" />
-                <input type="hidden" name="city" value="<%= pet["city"] %>" />
-                <input type="hidden" name="state" value="<%= pet["state"] %>" />
-                <input type="hidden" name="zip" value="<%= pet["zip"] %>" />
-                <input type="hidden" name="description" value="<%= pet["description"] %>" />
-                <input type="hidden" name="picsmall" value="<%= pet["picsmall"] %>" />
-                <input type="hidden" name="petid" value="<%= pet["petid"] %>" />
-                <button type="submit">Meet me!</button>
+                <input type="hidden" name="petdata" value=<%= pet["petid"] %> />
+                <button type="submit">Save</button>
               </form>
             </div>
 
@@ -64,81 +60,10 @@
 
       </div>
     </div>
-
-
-
   
 </div>
 
 
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDntNQvZ1AMlJwJDnwycxyLWJcJvZUmCfk&libraries=places&libraries=geometry"></script>
 
-  
-<script>
-  var animal = '<%= @animal %>';
-  var breed  = '<%= @breed %>';
-  var zip = '<%= @zip %>';
-  var userLat = '<%= @userLat %>';
-  var userLng = '<%= @userLng %>';
-  var petInfo = <%= @petInfo %>;
-
-  
-
-  var center = { lat: parseFloat(userLat), lng: parseFloat(userLng) }
-  // console.log(zipLat)
-  // console.log(zipLng)
-  // console.log(center)  
-  // var address = ["10000 W O'Hare Ave, Chicago, IL 60666"]
-    function initMap() {
-      var map = new google.maps.Map(document.getElementById('map'), {zoom: 8});
-      var geocoder = new google.maps.Geocoder;
-   
-
-      function loopZip() {
-        for (var i = 0; i < petInfo.length; i++) {
-          geocoder.geocode({'address': petInfo[i][0]}, function(results, status) {
-            // console.log(results)
-          console.log(results[0], 'this is results')
-          console.log(results[0].geometry, 'this is results geometry')
-          // console.log(results[0].geometry.location.lat(), 'this is google maps geometry')
-    
-          var input = new google.maps.LatLng(center.lat, center.lng)
-          var shelter = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng())
-     
-          // console.log(shelter.lat(),shelter.lng())
-
-          // console.log(input)
-      // console.log(google.maps.geometry.spherical.computeDistanceBetween(something, somethingElse), 'this is sphericalllllllllll')
-          // console.log(google.maps.geometry.spherical.computeDistanceBetween(input, shelter), 'this is spherical')
-          var distance = google.maps.geometry.spherical.computeDistanceBetween(input, shelter) / 1609.34;
-          // console.log(distance, 'this is distance')
-            if (distance <= 25) {
-              if (status === 'OK') {
-                map.setCenter(center);
-
-                for (var i = 0; i < petInfo.length; i++) { 
-
-                  var petName = petInfo[i][1]
-                  // console.log(petName)
-                  var infowindow = new google.maps.InfoWindow({content: petName});
-                  var marker = new google.maps.Marker({ map: map, position: results[0].geometry.location });
-                  google.maps.event.addListener(marker, 'click', function() { infowindow.open(map,marker) });
-                }
-                
-
-
-            } else {
-              window.alert('Geocode was not successful for the following reason: ' +
-                  status);
-            }
-            }
-          
-          });
-        }   
-      }
-    loopZip();
-    }
-    initMap()
-    </script>
