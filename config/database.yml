@@ -10,4 +10,4 @@ production:
   database: heroku_05d4854da3a4a42
   username: b5e871bd510240
   password: ff0c2bbe
-  host: mysql://b5e871bd510240:ff0c2bbe@us-cdbr-iron-east-04.cleardb.net/heroku_05d4854da3a4a42?reconnect=true
+  host: mysql2://b5e871bd510240:ff0c2bbe@us-cdbr-iron-east-04.cleardb.net/heroku_05d4854da3a4a42?reconnect=true
