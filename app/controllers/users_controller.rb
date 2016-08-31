@@ -37,7 +37,6 @@ class UsersController < ApplicationController
       
       for pet in petsget do
         @petlist.push(pet)
-        puts pet["name"]
       end
 
       erb :user
