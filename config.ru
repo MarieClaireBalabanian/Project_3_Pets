@@ -5,7 +5,6 @@
 #  ---------------------------------
 require 'bundler'
 require 'yaml'
-require 'mysql2'
 
 
 # ENV['RACK_ENV'] ||= 'production'
