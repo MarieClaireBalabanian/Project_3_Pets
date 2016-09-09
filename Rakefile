@@ -25,7 +25,7 @@ namespace :db do
           $stderr.puts "#{AppConfig['database']} created"
         end
 
-      when /mysql2/
+      when /postgresql/
         encoding = AppConfig['encoding'] || ENV['CHARSET'] || 'utf8'
         ActiveRecord::Base.establish_connection AppConfig.symbolize_keys
         $stderr.puts "#{AppConfig['database']} created"

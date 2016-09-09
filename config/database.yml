@@ -7,7 +7,7 @@ development:
 # Do not set this db to the same as development or production.
 
 production:
-  adapter: mysql2
+  adapter: postgresql
   username: codeforcoffee
   password:
 
