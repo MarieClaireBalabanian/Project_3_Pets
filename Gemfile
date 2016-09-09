@@ -31,5 +31,5 @@ end
 #  Production dependent gems
 #  -------------------------
 group :production do
-  gem 'mysql2', '~> 0.4.4'
+  #gem 'mysql2', '~> 0.4.4'
 end
