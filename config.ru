@@ -12,12 +12,29 @@ require 'yaml'
 #  --------------------------
 Bundler.require :default, ENV['RACK_ENV'].to_sym
 
-database_cxn = YAML.load_file('./config/database.yml')
+
+ENV["RACK_ENV"] ||= "development"
+
+full_config = YAML.load_file('./config/database.yml') || {}
+env_config  = full_config[ENV['RACK_ENV']] || {}
+AppConfig    = OpenStruct.new(env_config)
+
+
+if ENV['DATABASE_URL']
+  Bundler.require(:production)
+  DB = ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
+else
+  Bundler.require(:development)
+  DB = ActiveRecord::Base.establish_connection(
+    :adapter => AppConfig["adapter"],
+    :database => AppConfig["database"]
+  )
+end
 
 
 #  Setup connection with Active Record
 #  -----------------------------------
-ActiveRecord::Base.establish_connection(database_cxn[ENV['RACK_ENV']])
+ActiveRecord::Base.establish_connection(full_config[ENV['RACK_ENV']])
 
 #  Require models
 #  --------------

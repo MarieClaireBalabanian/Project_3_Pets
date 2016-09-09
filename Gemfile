@@ -13,16 +13,21 @@ gem 'sinatra-activerecord', require: 'sinatra/activerecord'
 gem 'bcrypt'
 gem 'json'
 gem 'httparty'
-gem 'pry'
 gem 'geocoder'
+gem 'rake', '~> 11.2', '>= 11.2.2'
+gem 'pry'
+
+
 
 #  Environment gems
 #  ------------------
-group :development do
+group :development, :test do
   gem 'rerun'
   gem 'sqlite3'
 end
 
+#  Production dependent gems
+#  -------------------------
 group :production do
   gem 'mysql2', '~> 0.4.4'
 end

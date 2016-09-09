@@ -49,7 +49,7 @@ class PetsController < ApplicationController
     @userLat = @userCoord[0]
     @userLng = @userCoord[1]
   
-    result  = HTTParty.get("http://api.petfinder.com/pet.find?key=61635e39395ce71e4d0eba82c79adb55&location=#{@zip}&animal=#{@animal}&breed=#{@breed}&count=50&format=json").parsed_response
+    result  = HTTParty.get("http://api.petfinder.com/pet.find?key=61635e39395ce71e4d0eba82c79adb55&location=#{@zip}&animal=#{@animal}&breed=#{@breed}&count=25&format=json").parsed_response
     
     @petArray = []
       

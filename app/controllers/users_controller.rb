@@ -37,38 +37,7 @@ class UsersController < ApplicationController
       
       for pet in petsget do
         @petlist.push(pet)
-        puts pet["name"]
       end
-
-      # for pet in petsget do
-      #   puts pet
-      # end 
-      # puts '=================================='
-
-
-
-
-
-
-
-      # for pet in petsget do
-      # pet = {"name"        =>animal["name"]["$t"],
-      #        "animal"      =>animal["animal"]["$t"],
-      #        "breed"       =>@breed,
-      #        "description" =>animal["description"]["$t"],
-      #        "phone"       =>animal["contact"]["phone"]["$t"],
-      #        "email"       =>animal["contact"]["email"]["$t"],
-      #        "address"     =>animal["contact"]["address1"]["$t"],
-      #        "city"        =>animal["contact"]["city"]["$t"],
-      #        "state"       =>animal["contact"]["state"]["$t"],
-      #        "zip"         =>animal["contact"]["zip"]["$t"],
-      #        "picsmall"    =>animal["media"]["photos"]["photo"][1]["$t"],
-      #        "petid"       =>animal["id"]["$t"]
-      #       }
- 
-      # @savedpets.push(pet)
-      # puts pet["name"]
-      # end
 
 
       erb :user
