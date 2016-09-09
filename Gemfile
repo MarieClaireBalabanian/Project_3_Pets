@@ -7,6 +7,7 @@ source 'http://rubygems.org'
 
 #  Required gems
 #  -------------
+gem 'rack'
 gem 'sinatra', require: 'sinatra/base'
 gem 'bundler'
 gem 'sinatra-activerecord', require: 'sinatra/activerecord'

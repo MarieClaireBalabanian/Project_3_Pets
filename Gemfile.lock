@@ -69,6 +69,7 @@ DEPENDENCIES
   json
   mysql2 (~> 0.4.4)
   pry
+  rack
   rake (~> 11.2, >= 11.2.2)
   rerun
   sinatra

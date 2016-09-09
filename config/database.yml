@@ -8,9 +8,6 @@ development:
 
 production:
   adapter: mysql2
-  encoding: unicode
-  database: sinatra_rake_boilerplate_prod
-  pool: 5
   username: codeforcoffee
   password:
 
