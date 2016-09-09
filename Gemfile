@@ -16,6 +16,7 @@ gem 'httparty'
 gem 'geocoder'
 gem 'rake', '~> 11.2', '>= 11.2.2'
 gem 'pry'
+gem 'mysql2', '~> 0.4.4'
 
 
 
